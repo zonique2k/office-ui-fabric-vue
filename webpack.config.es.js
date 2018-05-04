@@ -4,35 +4,22 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const prism = require('prismjs');
 
 module.exports = function(env) {
-  const distEntry = {
-    'index.js': './src/index.js',
-    'index.css': './src/index.css'
-  };
-
-  const docsEntry = {
-    'index.docs.js': './docs/index.js',
-    'index.docs.css': './docs/index.css'
-  }
-
-  let entry = env.development ? docsEntry : Object.assign(distEntry, docsEntry);
-
-  if (env.lib) {
-    entry = { 'office-ui-fabric.js': './src/lib.js' }
-  }
+  entry = { 'office-ui-fabric.es.js': './src/es.js' }
 
   let uglifyPlugin = []
 
-  if (env.production) {
-    uglifyPlugin.push(new webpack.optimize.UglifyJsPlugin());
-  }
+//   if (env.production) {
+//     uglifyPlugin.push(new webpack.optimize.UglifyJsPlugin());
+//   }
 
   return {
     context: __dirname,
     entry: entry,
     output: {
-      path: env.lib? __dirname + '/lib' : __dirname + '/dist',
+      path: __dirname + '/dist',
       filename: '[name]',
       publicPath: 'http://localhost:8080/dist',
+      umdNamedDefine: true,
       library: 'OfficeUIFabricVue',
       libraryTarget: 'umd'
     },
@@ -88,9 +75,12 @@ module.exports = function(env) {
         }
       ]
     },
+    externals: {
+        vue: 'vue'
+      },
     plugins: [
       ...uglifyPlugin,
-      new webpack.optimize.ModuleConcatenationPlugin(),
+    //   new webpack.optimize.ModuleConcatenationPlugin(),
       new ExtractTextPlugin('[name]'),
       //  define the vue enviroment.
       new webpack.DefinePlugin({
