@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+            <ui-button>tesst</ui-button>
+            <ui-callout
+                title='All of your favorite people'
+                content='Message body is optional. If help documentation is available, consider adding a link to learn more at the bottom.'>
+                <ui-button slot='actions'>Learn more</ui-button>
+                <ui-button>Open Callout</ui-button>
+            </ui-callout>
+        </div>
+
+    <script type="module">
+        import {uiButton, uiCallout} from './module.js';
+        new Vue({
+            components:{ uiButton, uiCallout },
+            el: '#app',
+        });
+
+    </script>
+    
+</body>
+</html>

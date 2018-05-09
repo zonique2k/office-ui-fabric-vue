@@ -16,32 +16,55 @@
 // import textFieldInstaller from './components/text_field';
 // import toggleInstaller from './components/toggle';
 
-import Breadcrumb from './components/Breadcrumb/Breadcrumb.vue';
-import BreadcrumbItem from './components/Breadcrumb/BreadcrumbItem.vue';
+// import Breadcrumb from './components/Breadcrumb/Breadcrumb.vue';
+// import BreadcrumbItem from './components/Breadcrumb/BreadcrumbItem.vue';
 import Button from './components/Button/Button.vue';
+
+import fabric from '../lib/office-ui-fabric';
 import Callout from './components/Callout/Callout.vue';
-import Checkbox from './components/Checkbox/Checkbox.vue';
-import ChoiceFieldGroup from './components/choice_field_group/ChoiceFieldGroup.vue';
-import ChoiceField from './components/choice_field_group/ChoiceField.vue';
 
-import CommandBar from './components/Command_bar/CommandBar.vue';
-import CommandButton from './components/Command_Button/CommandButton.vue';
-import ContextualMenu from './components/Contextual_Menu/ContextualMenu.vue';
-import ContextualMenuItem from './components/Contextual_Menu/ContextualMenuItem.vue';
+// import Checkbox from './components/Checkbox/Checkbox.vue';
+// import ChoiceFieldGroup from './components/choice_field_group/ChoiceFieldGroup.vue';
+// import ChoiceField from './components/choice_field_group/ChoiceField.vue';
 
-import DatePicker from './components/Date_Picker/DatePicker.vue';
+// import CommandBar from './components/Command_bar/CommandBar.vue';
+// import CommandButton from './components/Command_Button/CommandButton.vue';
+// import ContextualMenu from './components/Contextual_Menu/ContextualMenu.vue';
+// import ContextualMenuItem from './components/Contextual_Menu/ContextualMenuItem.vue';
 
-import SearchBox from './components/Search_box/SearchBox.vue';
+// import DatePicker from './components/Date_Picker/DatePicker.vue';
 
-export { Breadcrumb, BreadcrumbItem }
-export { Button }
-export { Callout }
-export { Checkbox }
-export { ChoiceFieldGroup, ChoiceField }
+// import SearchBox from './components/Search_box/SearchBox.vue';
 
-export { CommandBar }
-export { CommandButton }
-export { ContextualMenu, ContextualMenuItem}
+// export { Breadcrumb, BreadcrumbItem }
+// export { Button  }
+// export { Callout }
+// export { Checkbox }
+// export { ChoiceFieldGroup, ChoiceField }
 
-export { DatePicker }
-export { SearchBox }
+// export { CommandBar }
+// export { CommandButton }
+// export { ContextualMenu, ContextualMenuItem}
+
+// export { DatePicker }
+// export { SearchBox }
+
+function wrapComponent(component, css)
+{
+    return {
+        mixins : [component],
+        beforeCreate(){
+            if(!this.injected)
+            {
+                this.injected = true;
+                this.$fabric = this.$fabric || {};
+                this.$fabric.Callout = fabric.Callout;
+                console.log("inject with css: " + css);
+            }
+        }
+    }
+}
+
+const uiButton = wrapComponent(Button, "blah");
+const uiCallout = wrapComponent(Callout, "blah");
+export { uiButton, uiCallout }
