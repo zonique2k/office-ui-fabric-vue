@@ -49,7 +49,11 @@
       title: String,
       content: String
     },
-
+    data() {
+      return {
+        calloutInstance: null
+      };
+    },
     computed: {
       calloutClass() {
         return {
@@ -60,7 +64,7 @@
     },
 
     mounted() {
-      new this.$fabric.Callout(
+      this.calloutInstance = new this.$fabric.Callout(
         this.$refs.callout,
         this.$refs.calloutTrigger,
         this.position
