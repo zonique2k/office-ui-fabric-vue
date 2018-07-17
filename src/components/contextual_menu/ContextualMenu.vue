@@ -48,11 +48,15 @@
     created() {
       this.eventHub.$on('updateValue', this.updateValue);
     },
-
+	data(){
+		return {
+			contextualMenuInstance : null
+		}
+	},
     mounted() {
       this.setChildrenValue();
 
-      new this.$fabric.ContextualMenu(
+      this.contextualMenuInstance = new this.$fabric.ContextualMenu(
         this.$refs.contextualMenu,
         this.$refs.contextualMenuTrigger
       );
