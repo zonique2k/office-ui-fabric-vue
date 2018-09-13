@@ -18,7 +18,7 @@
     name: 'ou-button',
 
     mixins: [
-      type('primary', 'hero', 'compound', 'small'),
+      type('primary', 'hero', 'compound', 'small', 'default'),
       disabled,
       icon
     ],
